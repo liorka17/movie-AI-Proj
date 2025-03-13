@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="he"> 
+<%- include('partials/head') %> <!-- חיבור קובץ ה-ההאדר שמכיל את כל הגדרות המטא והסטיילינג -->
+
+<body>
+    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+
+    <main class="login-container"> <!-- מיכל ראשי לטופס ההתחברות -->
+        <div class="login-box"> <!-- קופסת ההתחברות -->
+            <h2>🔑 התחברות למועדון הקולנוע</h2> <!-- כותרת הדף -->
+            <p class="login-subtitle">🎥 התחבר כדי ליהנות מהמלצות אישיות על הסרטים הטובים ביותר!</p> <!-- תיאור קצר -->
+
+            <% if (typeof errorMessage !== 'undefined' && errorMessage) { %> <!-- בדיקה אם קיימת הודעת שגיאה -->
+                <p class="error-message"><%= errorMessage %></p> <!-- הצגת הודעת שגיאה אם קיימת -->
+            <% } %>
+
+            <form action="/user/login" method="POST"> <!-- טופס ההתחברות שנשלח לשרת -->
+                <div class="input-group"> <!-- קבוצת קלט עבור כתובת האימייל -->
+                    <label for="email">📧 כתובת האימייל</label> <!-- תווית שדה האימייל -->
+                    <input type="email" id="email" name="email" required> <!-- שדה קלט לאימייל -->
+                </div>
+
+                <div class="input-group"> <!-- קבוצת קלט עבור הסיסמה -->
+                    <label for="password">🔒 סיסמה</label> <!-- תווית שדה הסיסמה -->
+                    <input type="password" id="password" name="password" required> <!-- שדה קלט לסיסמה -->
+                </div>
+
+                <button type="submit" class="btn-login">🎬 התחבר עכשיו</button> <!-- כפתור התחברות -->
+            </form>
+
+            <p class="register-link">אין לך חשבון? <a href="/register">✨ הרשם כאן</a></p> <!-- קישור להרשמה -->
+        </div>
+    </main>
+
+    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+</body>
+</html>

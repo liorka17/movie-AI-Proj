@@ -1,0 +1,14 @@
+<nav class="cinema-navbar"> <!-- יצירת תפריט ניווט עם עיצוב מותאם לקולנוע -->
+    <a href="/" class="nav-item">🏠 דף הבית</a> <!-- קישור לדף הבית -->
+    <a href="/video/gallery" class="nav-item">🎞️ גלריית סרטים</a> <!-- קישור לגלריית הסרטים -->
+    <a href="/recommendations" class="nav-item">⭐ המלצות</a> <!-- קישור לעמוד ההמלצות -->
+    <a href="/video/search" class="nav-item">🔍 חיפוש סרטים</a> <!-- קישור לעמוד החיפוש -->
+
+    <% if (user) { %> <!-- בדיקה אם המשתמש מחובר -->
+        <a href="/profile" class="nav-item">🙋‍♂️ הפרופיל שלי</a> <!-- קישור לעמוד הפרופיל -->
+        <a href="/user/logout" class="nav-item logout-btn">🚪 יציאה</a> <!-- קישור ליציאה מהמערכת -->
+    <% } else { %> <!-- אם המשתמש לא מחובר -->
+        <a href="/login" class="nav-item">🔑 התחברות</a> <!-- קישור לעמוד ההתחברות -->
+        <a href="/register" class="nav-item">📝 הרשמה</a> <!-- קישור לעמוד ההרשמה -->
+    <% } %>
+</nav>

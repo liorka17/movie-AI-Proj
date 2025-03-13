@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="he"> 
+<%- include('partials/head') %> <!-- חיבור קובץ ה-ההאדר שמכיל את כל הגדרות המטא והסטיילינג -->
+
+<body>
+    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+
+    <main class="search-container"> <!-- מיכל ראשי לעמוד החיפוש -->
+        <h1 class="search-title">🔍 חיפוש סרטים</h1> <!-- כותרת העמוד -->
+
+        <div class="search-box"> <!-- תיבת חיפוש הסרטים -->
+            <input type="text" id="searchInput" placeholder="הקלידו שם סרט בעברית או באנגלית"> <!-- שדה קלט למשתמש -->
+        </div>
+
+        <div id="searchResults" class="movies-grid"></div> <!-- אזור להצגת תוצאות החיפוש -->
+    </main>
+
+    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+
+    <script src="/script/search.js"></script> <!-- חיבור לסקריפט שאחראי על החיפוש -->
+</body>
+</html>

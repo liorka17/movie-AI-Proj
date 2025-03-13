@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
+<%- include('partials/head') %> <!-- חיבור קובץ ה-HEAD שמכיל את כל הגדרות המטא והסטיילינג -->
+
+<body>
+    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+
+    <main class="profile-container"> <!-- מיכל ראשי לעמוד הפרופיל -->
+        <div class="profile-box"> <!-- קופסת תצוגת הפרופיל -->
+            <h2>👤 הפרופיל שלי</h2> <!-- כותרת הדף -->
+            <p class="profile-subtitle">🎟️ הפרטים שלך במערכת</p> <!-- תיאור קצר -->
+
+            <div class="profile-info"> <!-- מיכל מידע המשתמש -->
+                <p><strong>👤 שם משתמש:</strong> <%= user.username %></p> <!-- הצגת שם המשתמש -->
+                <p><strong>📧 אימייל:</strong> <%= user.email %></p> <!-- הצגת כתובת האימייל של המשתמש -->
+            </div>
+        </div>
+            <!-- <div class="profile-actions">  -----לשימוש עתידי
+                <a href="/edit-profile" class="btn-edit">✏️ עריכת פרופיל</a> -----לשימוש עתידי
+                <a href="/logout" class="btn-logout">🚪 יציאה</a> -----לשימוש עתידי
+            </div> -->
+    </main>
+
+    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+</body>
+</html>
+
+
+

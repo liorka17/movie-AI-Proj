@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
+<%- include('partials/head') %> <!-- חיבור קובץ ה-HEAD שמכיל את כל הגדרות המטא והסטיילינג -->
+
+<body>
+    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+
+    <main class="movie-details-container"> <!-- מיכל ראשי לעמוד פרטי הסרט -->
+        <h2>🎬 <%= movie.title %></h2> <!-- כותרת עם שם הסרט -->
+
+        <% if (success) { %> <!-- אם המשתמש קיבל הודעת הצלחה (למשל לאחר דירוג) -->
+            <div class="success-message">✅ הדירוג נשמר בהצלחה</div> <!-- הצגת הודעת הצלחה -->
+        <% } %>
+
+        <div class="movie-content"> <!-- מיכל שמכיל את כל המידע על הסרט -->
+            <div class="movie-image"> <!-- תצוגת תמונת הסרט -->
+                <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" alt="<%= movie.title %>">
+            </div>
+
+            <div class="movie-info"> <!-- מיכל שמציג מידע על הסרט -->
+                <p class="movie-overview"><strong>📜 תקציר:</strong> <%= movie.overview || "לא נמצא תקציר בעברית" %></p> <!-- הצגת תקציר הסרט, אם אין תקציר בעברית - הצגת הודעה מתאימה -->
+                
+                <% if (trailer) { %> <!-- אם יש טריילר לסרט -->
+                    <div class="movie-trailer"> <!-- הצגת הטריילר -->
+                        <iframe width="560" height="315" src="<%= trailer %>" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                <% } else { %> <!-- אם אין טריילר לסרט -->
+                    <p class="no-trailer">🚫 אין טריילר זמין</p> <!-- הצגת הודעה שאין טריילר זמין -->
+                <% } %>
+
+                <% if (user) { %> <!-- אם המשתמש מחובר, להציג טופס דירוג -->
+                    <form action="/rating/submit" method="POST" class="rating-form">
+                        <input type="hidden" name="movieId" value="<%= movie.id %>"> <!-- שליחת מזהה הסרט -->
+
+                        <p class="rating-title">🍿 דרגו את הסרט וקבלו המלצות מדויקות</p> <!-- הנחיה למשתמש לדרג -->
+
+                        <div class="rating-buttons"> <!-- כפתורי הדירוג -->
+                            <button type="submit" name="rating" value="1" class="btn-rate bad">😠 גרוע</button>
+                            <button type="submit" name="rating" value="2" class="btn-rate meh">😐 סביר</button>
+                            <button type="submit" name="rating" value="3" class="btn-rate okay">🙂 טוב</button>
+                            <button type="submit" name="rating" value="4" class="btn-rate great">😃 מעולה</button>
+                            <button type="submit" name="rating" value="5" class="btn-rate awesome">🤩 יצירת מופת</button>
+                        </div>
+                    </form>
+                <% } else { %> <!-- אם המשתמש לא מחובר -->
+                    <p class="login-message">🔑 עליך להתחבר כדי לדרג סרטים</p> <!-- הצגת הודעה שהמשתמש צריך להתחבר -->
+                <% } %>
+                
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-footer החיצוני -->
+    <script src="/script/rating.js"></script> <!-- חיבור לקובץ ה-JavaScript שאחראי על הדירוג -->
+</body>
+</html>

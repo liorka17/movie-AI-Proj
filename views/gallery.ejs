@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
+<%- include('partials/head') %> <!-- הכנסת קובץ ה-האדר החיצוני שמכיל את כל הגדרות המטא והסטיילינג -->
+
+<body>
+    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+
+    <main class="gallery-container"> <!-- מיכל ראשי עבור גלריית הסרטים -->
+        <h1>🎥 סרטים חמים עכשיו</h1> <!-- כותרת העמוד -->
+
+        <div class="movies-grid"> <!-- מיכל הסרטים, רשת שמציגה את הסרטים -->
+            <% if (movies && movies.length > 0) { %> <!-- בדיקה אם יש סרטים להצגה -->
+                <% movies.forEach(movie => { %> <!-- לולאה שעוברת על כל הסרטים -->
+                    <div class="movie-card"> <!-- כרטיס סרט -->
+                        <div class="movie-image"> <!-- תמונת הסרט -->
+                            <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>">
+                        </div>
+                        <div class="movie-info"> <!-- פרטי הסרט -->
+                            <h3><%= movie.title %></h3> <!-- שם הסרט -->
+                            <a href="/video/movie/<%= movie.id %>" class="btn-details">📽️ פרטים נוספים</a> <!-- כפתור להצגת פרטי הסרט -->
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %> <!-- במקרה שאין סרטים להצגה -->
+                <p class="error-message">⚠️ לא נמצאו סרטים</p> <!-- הודעת שגיאה אם אין סרטים -->
+            <% } %>
+        </div>
+
+        <div class="pagination"> <!-- ניווט בין עמודים -->
+            <% if (page > 1) { %> <!-- הצגת כפתור לעמוד קודם רק אם יש יותר מעמוד 1 -->
+                <a href="/video/gallery?page=<%= page - 1 %>" class="page-btn">⬅️ עמוד קודם</a>
+            <% } %>
+
+            <span class="page-number">עמוד <%= page %></span> <!-- הצגת מספר העמוד הנוכחי -->
+
+            <% if (movies.length === 20) { %> <!-- הצגת כפתור לעמוד הבא אם יש 20 סרטים (סימן שיש עוד עמודים) -->
+                <a href="/video/gallery?page=<%= page + 1 %>" class="page-btn">עמוד הבא ➡️</a>
+            <% } %>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-פוטר החיצוני -->
+</body>
+</html>

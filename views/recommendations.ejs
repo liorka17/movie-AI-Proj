@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
+<%- include('partials/head') %> <!-- חיבור קובץ ה-HEAD שמכיל את כל הגדרות המטא והסטיילינג -->
+
+<body>
+    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+
+    <main class="recommendation-container"> <!-- מיכל ראשי לעמוד ההמלצות -->
+        <h1>🎬 המלצות מותאמות עבורך</h1> <!-- כותרת הדף -->
+
+        <% if (message) { %> <!-- אם יש הודעה (למשל "לא נמצאו המלצות"), הצג אותה -->
+            <p class="info-message"><%= message %></p>
+        <% } %>
+
+        <div class="movies-grid"> <!-- מיכל שמציג את הסרטים ברשת -->
+            <% recommendations.forEach(movie => { %> <!-- לולאה העוברת על כל רשימת ההמלצות -->
+                <div class="movie-card"> <!-- כרטיס סרט -->
+                    <div class="movie-image"> <!-- תצוגת תמונת הסרט -->
+                        <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+                    </div>
+                    <div class="movie-info"> <!-- מידע על הסרט -->
+                        <h3><%= movie.title %></h3> <!-- שם הסרט -->
+                        <p><%= movie.overview %></p> <!-- תקציר הסרט -->
+                        <a href="/video/movie/<%= movie.id %>" class="btn">📽️ פרטים נוספים</a> <!-- קישור לעמוד הסרט -->
+                    </div>
+                </div>
+            <% }) %> <!-- סוף הלולאה -->
+        </div>
+    </main>
+
+    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+</body>
+</html>

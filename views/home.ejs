@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="he"> <!-- הגדרת שפת הדף לעברית -->
+<%- include('partials/head') %> <!-- חיבור קובץ ה-ההאדר שמכיל את כל הגדרות המטא והסטיילינג -->
+
+<body>
+    <%- include('partials/navbar') %> <!-- הכנסת קובץ הניווט החיצוני -->
+
+    <div class="cinema-light"></div> <!-- אלמנט עיצוב המדמה תאורת קולנוע -->
+
+    <main class="home-container"> <!-- מיכל ראשי לעמוד הבית -->
+        <h1 class="cinema-title">🍿 שלום, אני ג'ימי הממליץ שלכם 🎬</h1> <!-- כותרת העמוד -->
+        <p class="cinema-subtitle">מצאתי את הסרטים הכי טובים בשבילכם 🎟️</p> <!-- כותרת משנה -->
+
+        <div class="buttons-container"> <!-- מיכל כפתורים למעבר מהיר לעמודים שונים -->
+            <a href="/recommendations" class="cinema-button">⭐ המלצות</a> <!-- מעבר לעמוד ההמלצות -->
+            <a href="/video/gallery" class="cinema-button">🎞️ גלריית סרטים</a> <!-- מעבר לגלריית הסרטים -->
+        </div>
+
+        <!-- 🔥 סטטיסטיקות עם אנימציות -->
+        <div class="stats-container"> <!-- מיכל שמציג סטטיסטיקות שונות -->
+
+            <!-- 🔗 כמות הסרטים באתר - קישור לגלריית הסרטים -->
+            <a href="/video/gallery" class="stat-box-link">
+                <div class="stat-box">
+                    <h2>🎥 כמות הסרטים באתר</h2> <!-- כותרת הסטטיסטיקה -->
+                    <p class="stat-number"><%= totalMovies %>+</p> <!-- הצגת כמות הסרטים באתר -->
+                </div>
+            </a>
+
+            <!-- 🔗 הסרט הכי נצפה השבוע - אם יש נתונים עליו, מציג אותו כקישור לעמוד הסרט -->
+            <% if (topTrendingMovie) { %>
+                <a href="/video/movie/<%= topTrendingMovie.id %>" class="stat-box-link">
+                    <div class="stat-box">
+                        <h2>👑 הסרט הכי נצפה השבוע</h2> <!-- כותרת הסטטיסטיקה -->
+                        <p><%= topTrendingMovie.title %></p> <!-- שם הסרט הכי נצפה השבוע -->
+                    </div>
+                </a>
+            <% } %>
+
+            <!-- 🔗 הז'אנר הפופולרי ביותר - קישור לעמוד חיפוש לפי ז'אנרים -->
+            <a href="/video/genre/<%= mostPopularGenre %>" class="stat-box-link">
+                <div class="stat-box">
+                    <h2>🎭 הז'אנר הפופולרי ביותר</h2> <!-- כותרת הסטטיסטיקה -->
+                    <p><%= mostPopularGenre %></p> <!-- שם הז'אנר הפופולרי ביותר -->
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+</body>
+</html>
