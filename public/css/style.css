@@ -62,15 +62,18 @@ footer {
 
 /* 🎬 עיצוב תפריט ניווט - אווירת קולנוע */
 .cinema-navbar {
-    background: linear-gradient(90deg, #c70039, #900c3f);
+    display: flex; /* מסדר את הפריטים בשורה */
+    justify-content: space-between; /* הפריטים יתפרסו עם רווחים שווים */
+    align-items: center; /* יישור פריטים אנכית */
+    flex-wrap: wrap; /* אם אין מקום - ירדו שורה */
+    padding: 10px 20px;
+    background: #b90030;
+}
+
+.nav-links {
     display: flex;
-    justify-content: center;
-    padding: 15px 0;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+    gap: 15px; /* רווח בין הכפתורים */
+    flex-wrap: wrap; /* מונע חפיפה - אם אין מקום הם ירדו למטה */
 }
 
 .nav-item {
@@ -825,11 +828,8 @@ footer {
 /* סגנון האייקונים של הרשתות החברתיות */
 .social-icons {
     display: flex;
-    gap: 15px; /* רווח בין האייקונים */
-    align-items: center;
-    position: absolute;
-    left: 20px; /* מעביר לצד שמאל */
-    top: 20px;
+    gap: 10px;
+    flex-wrap: wrap; /* כשהמסך קטן - הם ירדו למטה */
 }
 
 /* עיצוב כל אייקון */
@@ -855,25 +855,19 @@ footer {
 }
 
 /* 🔹 פתרון למסכים קטנים 🔹 */
-@media screen and (max-width: 1024px) {
-    .cinema-navbar {
-        flex-direction: column;
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* במקום שורה - יהפוך לעמודה */
         align-items: center;
-        text-align: center;
+    }
+
+    .nav-links,
+    .social-icons {
+        justify-content: center;
+        width: 100%; /* פריסה מלאה */
     }
 
     .social-icons {
-        margin-top: 10px;
-        justify-content: center;
-    }
-    
-    .nav-item {
-        font-size: 16px;
-        margin: 5px 10px;
-    }
-
-    .social-icons a {
-        width: 30px;
-        height: 30px;
+        margin-top: 10px; /* מוסיף רווח כדי למנוע חפיפה */
     }
 }
