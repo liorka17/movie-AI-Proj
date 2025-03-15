@@ -796,3 +796,24 @@ footer {
 .delete-btn:active {
     transform: scale(0.95); /* הקטנה קלה בעת לחיצה */
 }
+
+
+
+
+/* 🎬 כפתור פרטים נוספים */
+.btn-recomm-details {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background: #B22222;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-recomm-details:hover {
+    background: #8B0000;
+    box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
+}
