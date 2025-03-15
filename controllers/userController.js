@@ -5,41 +5,58 @@ const sendEmail = require("../services/sendEmail"); // מייבא את פונק�
 
 // פונקציה זו מבצעת רישום משתמש חדש, מצפינה את הסיסמה, שומרת את המשתמש ויוצרת עבורו אסימון זיהוי (JWT).
 
+const sendWelcomeEmail = require("../services/sendEmail"); // מייבא את הפונקציה לשליחת מיילים
+
 exports.register = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password } = req.body; // קולט את הנתונים שנשלחו מהטופס
 
-        let user = await User.findOne({ email });
-        if (user) {
-            return res.status(400).render("register", { error: "User already exists", user: null });
+        let user = await User.findOne({ email }); // מחפש אם המשתמש כבר קיים במסד הנתונים
+        if (user) { // אם המשתמש כבר רשום
+            return res.status(400).render("register", { error: "User already exists", user: null }); // מציג הודעת שגיאה
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10); // מצפין את הסיסמה עם רמת הצפנה 10
 
-        user = new User({ username, email, password: hashedPassword });
-        await user.save();
+        user = new User({ username, email, password: hashedPassword }); // יוצר אובייקט משתמש חדש ושומר את הנתונים
+        await user.save(); // שומר את המשתמש במסד הנתונים
 
-        const token = jwt.sign({ userId: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        user.token = token;
-        await user.save();
-        res.cookie("token", token, { httpOnly: true });
+        const token = jwt.sign({ userId: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: "1h" }); // יוצר JWT עם תוקף של שעה
+        user.token = token; // משייך את ה-Token למשתמש
+        await user.save(); // שומר את העדכון במסד הנתונים
+        res.cookie("token", token, { httpOnly: true }); // שומר את ה-Token כ-Cookie כדי לאבטח את ההתחברות
 
-        console.log("✅ User registered and authenticated:", user);
+        console.log("✅ User registered and authenticated:", user); // מדפיס ללוג שהרישום הצליח
 
-        // 🔹 שליחת אימייל ברוך הבא
-        await sendEmail(
-            user.email,
-            "🎉 Welcome to Movie AI!",
-            `Hello ${user.username}, welcome to our movie recommendation platform!`,
-            `<h1>Hello ${user.username},</h1><p>Welcome to <strong>Movie AI</strong>! We hope you enjoy our movie recommendations. 🍿🎬</p>`
-        );
+        // 🔹 שליחת אימייל "ברוך הבא" עם עיצוב בעברית
+        await sendWelcomeEmail(user.email, user.username);
 
-        res.redirect("/");
-    } catch (error) {
+        // 🔹 בדיקה אם הבקשה מגיעה מ-Postman
+        const userAgent = req.get("User-Agent"); // מקבל את סוג ה-User-Agent (דפדפן/תוכנה אחרת)
+        const isPostman = userAgent && userAgent.includes("PostmanRuntime"); // בודק אם הבקשה מגיעה מפוסטמן
+
+        if (isPostman) { // אם הבקשה היא מפוסטמן
+            return res.status(201).json({ message: `user name ${username} and mail ${email}`, token }); // מחזיר JSON עם הודעה ו-Token
+        }
+
+        res.redirect("/"); // אם לא מדובר בפוסטמן, מפנה את המשתמש לדף הבית
+
+    } catch (error) { 
         console.error("❌ Error in register:", error);
-        res.status(500).render("register", { error: "Server error", user: null });
+
+        // 🔹 במקרה של שגיאה, מחזיר ג'ייסון אם הבקשה מגיעה מפוסטמן
+        const userAgent = req.get("User-Agent"); 
+        const isPostman = userAgent && userAgent.includes("PostmanRuntime");
+
+        if (isPostman) {
+            return res.status(500).json({ error: "Server error" });
+        }
+
+        res.status(500).render("register", { error: "Server error", user: null }); // אם לא מדובר בפוסטמן, מציג שגיאה בדף ההרשמה
     }
 };
+
+
 
 // פונקציה זו מטפלת בתהליך ההתחברות של המשתמש. היא בודקת אם כתובת האימייל והסיסמה תקינים
 // ואם כן, היא יוצרת אסימון זיהוי (ג'יידבליוטי) ושומרת אותו בעוגיה

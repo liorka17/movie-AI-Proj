@@ -18,7 +18,7 @@ exports.getRecommendations = async (ratedMovies) => {
         }
 
         const prompt = ` // יוצר טקסט בקשה ל-Gemini AI עם רשימת הסרטים שהמשתמש דירג
-            אני רוצה שתמליץ לי על 20 סרטים דומים לסרטים הבאים בהתבסס על הדירוגים שלהם: ${ratedMovies.join(", ")}.
+            אני רוצה שתמליץ לי על 5 סרטים דומים לסרטים הבאים בהתבסס על הדירוגים שלהם: ${ratedMovies.join(", ")}.
             החזר JSON תקף עם **ID הסרט** מ-TMDB, שם הסרט והתיאור.
             
             פורמט תקין לדוגמה:
@@ -62,7 +62,7 @@ exports.getRecommendations = async (ratedMovies) => {
         }
 
         // לולאה שמבצעת בקשה לכל סרט כדי לשלוף את תמונת הפוסטר שלו מה-טי.אמ.די.בי
-        const moviesWithImages = await Promise.all(parsedResponse.movies.slice(0, 20).map(async (movie) => {
+        const moviesWithImages = await Promise.all(parsedResponse.movies.slice(0, 5).map(async (movie) => {
             try {
                 const tmdbResponse = await axios.get(`${TMDB_API_URL}${movie.id}?api_key=${TMDB_API_KEY}&language=he`); // שולח בקשה ל-טי.אמ.די.בי לקבלת פרטי הסרט
                 return {
