@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs"); // מייבא את bcryptjs לצורך הצפנת סיסמאות
 const jwt = require("jsonwebtoken"); // מייבא את jsonwebtoken לצורך יצירת אסימוני זיהוי (JWT)
 const User = require('../models/user'); // מייבא את מודל המשתמשים ממסד הנתונים
-
+const {sendRegistrationEmail}=require('../services/emailService');
 
 // פונקציה זו מבצעת רישום משתמש חדש, מצפינה את הסיסמה, שומרת את המשתמש ויוצרת עבורו אסימון זיהוי (JWT).
 exports.register = async (req, res) => {
