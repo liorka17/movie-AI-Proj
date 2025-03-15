@@ -29,7 +29,7 @@ const sendEmail = async (to, subject, text, html) => {
     }
 };
 
-// פונקציה לשליחת אימייל "ברוך הבא" בעברית
+// פונקציה לשליחת אימייל ברוך הבא" 
 const sendWelcomeEmail = async (to, username) => {
     const subject = "🎬 ברוך הבא ל-Movie AI!"; // נושא המייל
     const text = `שלום ${username},\nתודה שנרשמת למערכת ההמלצות שלנו! 🎥\nהתחל לגלות סרטים מדהימים עכשיו!`; // טקסט רגיל

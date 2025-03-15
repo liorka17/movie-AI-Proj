@@ -3,9 +3,8 @@ const jwt = require("jsonwebtoken"); // מייבא את jsonwebtoken לצורך 
 const User = require('../models/user'); // מייבא את מודל המשתמשים ממסד הנתונים
 const sendEmail = require("../services/sendEmail"); // מייבא את פונקציית שליחת המיילים מתוך הקובץ sendEmail.js שבתוך תיקיית services
 
-// פונקציה זו מבצעת רישום משתמש חדש, מצפינה את הסיסמה, שומרת את המשתמש ויוצרת עבורו אסימון זיהוי (JWT).
-
 const sendWelcomeEmail = require("../services/sendEmail"); // מייבא את הפונקציה לשליחת מיילים
+// פונקציה זו מבצעת רישום משתמש חדש, מצפינה את הסיסמה, שומרת את המשתמש ויוצרת עבורו אסימון זיהוי (JWT).
 
 exports.register = async (req, res) => {
     try {
