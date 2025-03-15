@@ -41,10 +41,10 @@ const sendWelcomeEmail = async (to, username) => {
                 <h2 style="margin: 0;">🎬 ברוך הבא ל-Movie AI!</h2>
             </div>
             <p style="font-size: 18px; color: #333;">שלום <strong>${username}</strong>,</p>
-            <p style="font-size: 16px; color: #555;">תודה שנרשמת למערכת ההמלצות שלנו! 🎥</p>
-            <p style="font-size: 16px; color: #555;">עכשיו תוכל לקבל המלצות לסרטים שיתאימו בדיוק לטעם שלך.</p>
+            <p style="font-size: 16px; color: #555;">תודה שנרשמת למערכת ההמלצות שלנו 🎥</p>
+            <p style="font-size: 16px; color: #555;">עכשיו תוכל לקבל המלצות לסרטים שיתאימו בדיוק לטעם שלך</p>
             <a href="https://movieai.onrender.com" style="display: inline-block; padding: 10px 20px; background-color: #ff5733; color: #fff; text-decoration: none; border-radius: 5px; font-size: 18px;">🎞️ התחיל לגלות סרטים</a>
-            <p style="color: #777;">צוות Movie AI 🍿</p>
+            <p style="color: #777;"> Movie AI team 🍿</p>
         </div>
     `;
 
