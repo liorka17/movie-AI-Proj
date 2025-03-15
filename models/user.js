@@ -6,8 +6,6 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true }, // כתובת אימייל (ייחודית וחובה)
     password: { type: String, required: true }, // סיסמת המשתמש (חובה)
     token: { type: String }, // טוקן זיהוי של המשתמש (JWT)
-    profilePicture: { type: String, default: '/assets/empty.jpeg' }, // ✅ תמונת פרופיל עם ערך ברירת מחדל
-    //lastVisitedGames: [{ type: String }], // ✅ שמירת מזהי המשחקים האחרונים בהם המשתמש צפה
     createdAt: { type: Date, default: Date.now } // תאריך יצירת המשתמש
 });
 
