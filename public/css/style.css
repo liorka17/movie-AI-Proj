@@ -817,3 +817,36 @@ footer {
     background: #8B0000;
     box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
 }
+
+
+
+
+
+.social-icons {
+    display: flex;
+    gap: 15px; /* מגדיל את המרווח בין האייקונים */
+    align-items: center;
+    position: absolute;
+    top: 25px;
+    left: 200px; /* מעביר לצד השמאלי */
+}
+
+.social-icons a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.social-icons img {
+    width: 100%;
+    height: auto;
+    filter: brightness(1.2);
+    transition: transform 0.3s ease;
+    background: none; /* מסיר רקע לבן מסמל לינקדאין */
+    border-radius: 50%; /* הופך את הלוגואים לעגולים, אם רוצים */
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+}
+

@@ -1,5 +1,5 @@
 const dotenv = require('dotenv'); // מייבא את .אי.אנ.בי כדי לטעון משתני סביבה מקובץ .env
-dotenv.config(); // טוען את משתני הסביבה
+//dotenv.config(); // טוען את משתני הסביבה
 const express = require('express'); // מייבא את אקספרס לצורך יצירת השרת
 const connectDB = require('./config/db'); // מייבא את פונקציית החיבור למסד הנתונים
 const morgan = require("morgan"); // מייבא את מורגן לצורך לוגים של בקשות HTTP
@@ -10,6 +10,8 @@ const recommendationRoutes = require('./routes/recommendationRoutes'); // מיי
 const ratingRoutes = require('./routes/ratingRoutes'); // מייבא את הנתיבים לדירוג סרטים
 const profileRoutes = require('./routes/profileRoutes'); // מייבא את הנתיבים לפרופיל המשתמש
 const User = require('./models/user'); // מייבא את מודל המשתמשים ממסד הנתונים
+const setSocialLinks = require('./middleware/socialLinks'); // ייבוא המידלוור החדש
+
 const app = express(); // יוצר מופע של אפליקציית אקספרס
 
 connectDB(); // מתחבר למסד הנתונים
@@ -22,6 +24,7 @@ app.use(express.urlencoded({ extended: false })); // מידלוור שמאפשר
 app.use(cors()); // מידלוור שמאפשר בקשות ממקורות חיצוניים (קורס), למשל אם ה-פרונטהאנד רץ על דומיין אחר
 app.use(cookieParser()); // מידלוור לטיפול בעוגיות (קוקיס)
 app.use(express.static("public")); // מגדיר תיקייה סטטית (פאבליק) עבור קבצים כמו סי.אס.אס, תמונות וסקריפטים
+app.use(setSocialLinks); // שימוש במידלוור בכל הבקשות
 
 
 /*
@@ -53,6 +56,8 @@ app.use((req, res, next) => { // מידלוור שמופעל על כל הבקש�
     }
     next(); // ממשיך בבקשה הבאה בשרשרת
 });
+
+
 
 //  הגדרת הנתיבים עבור תיקיית הנתיבים
 app.use('/profile', profileRoutes); // נתיב שמטפל בעמוד הפרופיל של המשתמש
