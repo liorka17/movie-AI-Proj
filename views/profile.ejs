@@ -14,16 +14,18 @@
                 <p><strong>👤 שם משתמש:</strong> <%= user.username %></p> <!-- הצגת שם המשתמש -->
                 <p><strong>📧 אימייל:</strong> <%= user.email %></p> <!-- הצגת כתובת האימייל של המשתמש -->
             </div>
+
+            <!-- כפתור מחיקת חשבון -->
+            <form id="deleteForm" action="/user/delete" method="post">
+                <button type="submit" class="delete-btn">🗑️ מחק חשבון</button>
+            </form>
+            
         </div>
-            <!-- <div class="profile-actions">  -----לשימוש עתידי
-                <a href="/edit-profile" class="btn-edit">✏️ עריכת פרופיל</a> -----לשימוש עתידי
-                <a href="/logout" class="btn-logout">🚪 יציאה</a> -----לשימוש עתידי
-            </div> -->
     </main>
 
     <%- include('partials/footer') %> <!-- הכנסת קובץ ה-הפוטר החיצוני -->
+
+    <!-- חיבור לקובץ ה-JS שמונע מחיקות בטעות -->
+    <script src="/script/profile.js"></script>
 </body>
 </html>
-
-
-

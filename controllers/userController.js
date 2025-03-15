@@ -48,7 +48,6 @@ exports.register = async (req, res) => {
 };
 
 
-
 // פונקציה זו מטפלת בתהליך ההתחברות של המשתמש. היא בודקת אם כתובת האימייל והסיסמה תקינים
 // ואם כן, היא יוצרת אסימון זיהוי (ג'יידבליוטי) ושומרת אותו בעוגיה
 exports.login = async (req, res) => {
@@ -83,4 +82,32 @@ exports.login = async (req, res) => {
 exports.logout = (req, res) => {
     res.clearCookie("token"); // מוחק את העוגיה שמכילה את הטוקן
     res.redirect("/"); // מפנה את המשתמש לדף הבית לאחר ההתנתקות
+};
+
+exports.deleteUser = async (req, res) => {
+    try {
+        console.log("🔹 מחיקת משתמש - התחלה:", req.user);
+
+        if (!req.user) {
+            return res.status(401).json({ error: "❌ לא מורשה" });
+        }
+
+        // מחיקת המשתמש ממסד הנתונים
+        await User.findByIdAndDelete(req.user.userId);
+
+        // מחיקת ה-Token מהעוגיות כדי לנתק את המשתמש
+        res.clearCookie("token");
+
+        console.log("✅ משתמש נמחק בהצלחה");
+
+        // זיהוי סוג הבקשה - אם זה API (Postman) נחזיר JSON, אחרת נבצע הפניה
+        if (req.headers["content-type"] === "application/json" || req.xhr) {
+            return res.json({ success: true, message: "✅ החשבון נמחק בהצלחה" });
+        } else {
+            return res.redirect('/register'); // הפניית המשתמש לדף ההרשמה לאחר מחיקה
+        }
+    } catch (error) {
+        console.error("❌ שגיאה במחיקת המשתמש:", error);
+        return res.status(500).json({ error: "❌ שגיאת שרת" });
+    }
 };

@@ -766,3 +766,33 @@ footer {
     0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
     100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
 }
+
+
+
+
+
+/* -----------------------------------------עיצוב כפתור מחיקת חשבון ------------------------------------------*/
+.delete-btn {
+    background-color: #ff0000; /* רקע אדום */
+    color: white; /* צבע טקסט */
+    border: 2px solid #ffcc00; /* קו מתאר זהוב */
+    padding: 10px 20px; /* ריווח פנימי */
+    font-size: 16px; /* גודל טקסט */
+    font-weight: bold; /* טקסט בולט */
+    border-radius: 5px; /* פינות מעוגלות */
+    cursor: pointer; /* שינוי סמן העכבר */
+    transition: 0.3s ease-in-out; /* אפקט מעבר */
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3); /* צל קל */
+}
+
+/* אפקט ריחוף על הכפתור */
+.delete-btn:hover {
+    background-color: #cc0000; /* צבע כהה יותר */
+    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8); /* הוספת זוהר */
+    transform: scale(1.05); /* הגדלה קלה */
+}
+
+/* אנימציה בעת לחיצה */
+.delete-btn:active {
+    transform: scale(0.95); /* הקטנה קלה בעת לחיצה */
+}
